@@ -12,7 +12,10 @@ export default {
 
     theme: {
         extend: {
-            fontFamily: {
+            backgroundImage: {
+                'hero': "url('cover.jpg')",
+            },
+                fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },

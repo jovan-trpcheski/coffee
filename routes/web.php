@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\BasicInfoController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontPageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialLinkController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,23 +21,28 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+//Public routes
+Route::get('/', [FrontPageController::class, 'show'])->name('front-page');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+// /Admin routes
+Route::middleware('auth')->prefix('/admin')->group(function () {
+    //Dashboard
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    //Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //Basic Info
+    Route::get('info', [BasicInfoController::class, 'index'])->name('info');
+    Route::post('info', [BasicInfoController::class, 'update'])->name('info.update');
+    //Categories
+    Route::resource('categories', CategoryController::class)->except('show');
+    //Products
+    Route::resource('products', ProductController::class)->except('show');
+    //Social Links
+    Route::resource('social-links', SocialLinkController::class)->except('show');
 });
 
 require __DIR__.'/auth.php';
