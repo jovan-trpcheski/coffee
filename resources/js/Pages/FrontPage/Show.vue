@@ -18,7 +18,7 @@ const basicInfo = usePage().props.basicInfo;
         <meta v-if="basicInfo.meta_picture" property="og:image" :content=basicInfo.full_meta_picture_path />
 
     </Head>
-    <PublicLayout>
+    <PublicLayout class="overscroll-contain">
         <HeroSection id="hero"></HeroSection>
         <MenuSection id="menu"></MenuSection>
         <FooterSection id="footer"></FooterSection>

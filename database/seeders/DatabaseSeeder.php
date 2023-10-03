@@ -29,6 +29,5 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(SocialLinkSeeder::class);
 
-        Product::factory(50)->create();
     }
 }

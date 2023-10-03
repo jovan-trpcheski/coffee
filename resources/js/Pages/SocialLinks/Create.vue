@@ -76,12 +76,14 @@ function previewSvg(event) {
                                 <input type="file" accept="svg/*" @change="previewSvg" class="form-control-file"
                                        id="svg"  @input="form.svg = $event.target.files[0]"/>
 
-                                <div v-if="preview" class="border  p-2 mt-3">
+                                <div v-if="preview" class="border p-2 mt-3">
                                     <p>Preview:</p>
                                     <template v-if="preview">
                                         <img :src="preview" class="h-12 w-12 img-fluid"/>
                                     </template>
                                 </div>
+                                <InputError class="mt-2" :message="form.errors.svg" />
+
                             </div>
                             <!-- submit -->
                             <div class="flex items-center gap-4">

@@ -47,8 +47,7 @@ function previewPhoto(event) {
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form class="mt-6 space-y-6" @submit.prevent="form.post(route('info.update', form.id) )">
                             <!-- name -->
@@ -156,7 +155,7 @@ function previewPhoto(event) {
 
                             </div>
                             <!-- meta picture -->
-                            <div class="form-group">
+                            <div>
                                 <InputLabel for="meta_picture" value="Meta Picture"/>
                                 <input id="meta_picture" accept="photo/*" class="form-control-file" type="file"
                                        @change="previewPhoto" @input="form.meta_picture = $event.target.files[0]"/>
@@ -165,10 +164,10 @@ function previewPhoto(event) {
                                 <div v-if="basicInfo.meta_picture||preview" class="border p-2 mt-3">
                                     <p>Preview:</p>
                                     <template v-if="preview">
-                                        <img :src="preview" class="img-fluid "/>
+                                        <img :src="preview" class="img-fluid h-64 "/>
                                     </template>
                                     <template v-if="basicInfo.meta_picture&&!preview">
-                                        <img :src="basicInfo.full_meta_picture_path" class="img-fluid "/>
+                                        <img :src="basicInfo.full_meta_picture_path" class="img-fluid h-64 "/>
                                     </template>
                                 </div>
                             </div>
